@@ -10,11 +10,13 @@ public class Player : MonoBehaviour
 
     public bool drilling;
     Vector2 direction;
+    public RythmManager _rm;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         movementSpeed = 2.0f;
+        _rm = RythmManager.Instance;
     }
 
     // Update is called once per frame
@@ -28,7 +30,18 @@ public class Player : MonoBehaviour
         {
             drilling = false;
         }
-            horizontal = Input.GetAxis("Horizontal") * movementSpeed;
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (_rm.RythmWindow == true)
+            {
+                Debug.Log("Dans la frame");
+            }
+            else
+            {
+                Debug.LogError("On est plus bon");
+            }
+        }
+        horizontal = Input.GetAxis("Horizontal") * movementSpeed;
         vertical = Input.GetAxis("Vertical") * movementSpeed;
         direction = new Vector2(horizontal, vertical);
 
