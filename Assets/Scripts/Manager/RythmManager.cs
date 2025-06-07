@@ -11,6 +11,8 @@ public class RythmManager : MonoBehaviour
     public bool RythmWindow;
     public string[] ListOfButtons = {"Y", "B", "A", "X"};
     public List<Sprite> CircleMatchinButtons = new List<Sprite>();
+    public GameObject CenterButton;
+    public List<Sprite> CenterMatchinButtons = new List<Sprite>();
     public string buttonToPress;
     int increment;
     SpriteRenderer sprite;
@@ -44,6 +46,7 @@ public class RythmManager : MonoBehaviour
         _gm.ActivePlayer.PlayerAnimator.SetInteger("0Y1B2A3X", increment);
         buttonToPress = ListOfButtons[increment];
         sprite.sprite = CircleMatchinButtons[increment];
+        CenterButton.GetComponent<SpriteRenderer>().sprite = CenterMatchinButtons[increment];
         increment++;
         increment = increment > 3 ? 0 : increment;
         print(buttonToPress);

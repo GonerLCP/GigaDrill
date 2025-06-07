@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     Vector2 direction;
     public Animator PlayerAnimator;
     public RythmManager _rm;
+    public bool QTESuccess;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
