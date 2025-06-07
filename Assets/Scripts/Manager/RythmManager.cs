@@ -1,19 +1,29 @@
+using NUnit.Framework;
+using System.Globalization;
 using UnityEngine;
+using UnityEngine.Splines;
+using System.Collections;
+using System.Collections.Generic;
 
-public enum Bouton
-{
-    Y,B,A,X
-}
 public class RythmManager : MonoBehaviour
 {
     public static RythmManager Instance { get; private set; }
     public bool RythmWindow;
-    public Bouton btn;
+    public string[] ListOfButtons = {"Y", "B", "A", "X"};
+    public List<Sprite> CircleMatchinButtons = new List<Sprite>();
+    public string buttonToPress;
+    int increment;
+    SpriteRenderer sprite;
+
+    private GameManager _gm;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        RythmWindow = false;
         if (Instance == null) { Instance = this; } else { Destroy(this); }
+        _gm = GameManager.Instance;
+        sprite = GetComponent<SpriteRenderer>();
+        RythmWindow = false;
+        increment = 0;
     }
 
     // Update is called once per frame
@@ -31,6 +41,11 @@ public class RythmManager : MonoBehaviour
 
     public void ChangeButton()
     {
-        //btn = Bouton.;
+        _gm.ActivePlayer.PlayerAnimator.SetInteger("0Y1B2A3X", increment);
+        buttonToPress = ListOfButtons[increment];
+        sprite.sprite = CircleMatchinButtons[increment];
+        increment++;
+        increment = increment > 3 ? 0 : increment;
+        print(buttonToPress);
     }
 }

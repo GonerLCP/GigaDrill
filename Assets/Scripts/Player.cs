@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 
     public bool drilling;
     Vector2 direction;
+    public Animator PlayerAnimator;
     public RythmManager _rm;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
         if (direction.magnitude >= 0.1f)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            angle -= 90;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 

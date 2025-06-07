@@ -243,6 +243,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RythmWindow: 0
+  ListOfButtons:
+  - Y
+  - B
+  - A
+  - X
+  CircleMatchinButtons:
+  - {fileID: -4238076390668838630, guid: 4057d90150c1c8e4a92be45d271509a6, type: 3}
+  - {fileID: -6727782062121639084, guid: a4ecdc3c3a2a8cd4caaa8046a1651f3b, type: 3}
+  - {fileID: 7960628614175043954, guid: 51c0b063cfca93e4eb2498fdfcd56dda, type: 3}
+  - {fileID: 6260950988850938862, guid: b3a3067b35b99eb4fa061ea81326d965, type: 3}
+  buttonToPress: 
 --- !u!1 &454041629
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac6dacb4539c7a243ad9529cba98ba68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActivePlayer: {fileID: 1239984001}
 --- !u!1 &532403963
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,8 +459,9 @@ GameObject:
   - component: {fileID: 692941327}
   - component: {fileID: 692941328}
   - component: {fileID: 692941329}
+  - component: {fileID: 692941330}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Simon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,6 +559,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &692941330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692941326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00d2e819fd4f5a43b4a40d523ba6fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &782609631
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4431,6 +4456,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drilling: 0
+  PlayerAnimator: {fileID: 692941329}
   _rm: {fileID: 0}
 --- !u!61 &1239984002
 BoxCollider2D:
