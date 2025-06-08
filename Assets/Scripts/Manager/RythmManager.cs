@@ -20,6 +20,12 @@ public class RythmManager : MonoBehaviour
     SpriteRenderer sprite;
 
     private GameManager _gm;
+
+    public AudioSource audioSource;
+
+    public AudioClip drill;
+    public AudioClip gleam;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,8 +41,8 @@ public class RythmManager : MonoBehaviour
 
     public void SetRythmWindow() //Indique quand on est dans la fenetre d'opportunité. C'es tappellé depuis l'animator
     {
-        print(RythmWindow);
-        RythmWindow = !RythmWindow; //Attention, peut créer des problèmes si on exit l'anim pas au bon moment à préter attention
+        RythmWindow = true; //Attention, peut créer des problèmes si on exit l'anim pas au bon moment à préter attention
+        audioSource.PlayOneShot(gleam, 0.1f);
         //RythmWindow = RythmWindow ? false : true;
     }
 
@@ -51,6 +57,8 @@ public class RythmManager : MonoBehaviour
 
     public void RythmEnd()//Appelé à la fin de l'animator
     {
+        RythmWindow = false;
+
         if (RythmCompleted == true)//Si on à fait une touche, que c'était la bonne et que c'était dans les temps alors
         {
             ChangeButton();
@@ -67,5 +75,6 @@ public class RythmManager : MonoBehaviour
     public void AddImpulsion()
     {
         _gm.ActivePlayer.Impulsion = _gm.ActivePlayer.ImpulsionSetter;
+        audioSource.PlayOneShot(drill, 0.1f);
     }
 }
