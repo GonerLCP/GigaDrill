@@ -20,7 +20,7 @@ public class ScoreManager : MonoBehaviour
         _gm = GameManager.Instance;
 
         scoreText.text = "Height: " + score.ToString() + " m";
-        recordText.text = "Highest: " + record.ToString();
+        recordText.text = "Highest: " + record.ToString() + " m";
     }
 
     // Update is called once per frame
@@ -28,5 +28,8 @@ public class ScoreManager : MonoBehaviour
     {
         score = (int)_gm.ActivePlayer.transform.position.y;
         scoreText.text = "Height: " + score.ToString() + " m";
+        if (record < score)
+            record = score;
+            recordText.text = "Highest: " + record.ToString() + " m";
     }
 }
