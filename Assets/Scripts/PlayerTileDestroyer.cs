@@ -18,6 +18,7 @@ public class PlayerTileDestroyer : MonoBehaviour
 
             if (targetTilemap.HasTile(cellPos))
             {
+                gm.ActivePlayer.Impulsion -= gm.ActivePlayer.ImpulsionBlocReduce;
                 targetTilemap.SetTile(cellPos, null); // Supprime la tile
                 Destroy(this);
                 //Debug.Log("Tile supprimée à " + cellPos);

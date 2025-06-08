@@ -62,4 +62,9 @@ public class RythmManager : MonoBehaviour
             _gm.ActivePlayer.Explosion();
         }
     }
+
+    public void AddImpulsion()
+    {
+        _gm.ActivePlayer.Impulsion = _gm.ActivePlayer.ImpulsionSetter;
+    }
 }

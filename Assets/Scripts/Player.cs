@@ -26,6 +26,9 @@ public class Player : MonoBehaviour
     private bool dead;
 
     public Transform RespawnPoint;
+    public float Impulsion;
+    public float ImpulsionSetter;
+    public float ImpulsionBlocReduce;
 
     //les 3 prochaines fonctions la, aucune idée de ce que ça fait, c'est pour l'input manager
     private void Awake()
@@ -81,8 +84,18 @@ public class Player : MonoBehaviour
             drilling = true;
         }
         if (dead) { return; } //empêche le déplacement si on est mort
-        direction = move.ReadValue<Vector2>() * movementSpeed;
 
+        if (Impulsion >= 0.1f)
+        {
+            Impulsion -= 0.1f;
+        }
+        else { Impulsion = 0f; }
+        
+        if (move.ReadValue<Vector2>().magnitude> 0.1f)
+        {
+            direction = move.ReadValue<Vector2>() * movementSpeed;
+        }
+        Vector2 directiontampon = direction;
         if (direction.magnitude >= 0.1f)
         {
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -90,7 +103,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
 
-        Vector2 moving = direction.normalized * movementSpeed * Time.fixedDeltaTime;
+        Vector2 moving = direction.normalized * movementSpeed * Time.fixedDeltaTime*Impulsion;
         rb.MovePosition(rb.position + moving);
         //rb.linearVelocity = direction;
     }
@@ -194,5 +207,11 @@ public class Player : MonoBehaviour
         dead = false;
         ExplosionAnimator.gameObject.SetActive(false);
         transform.position = RespawnPoint.position;
+    }
+
+    IEnumerator DecreaseSpeed()
+    {
+            yield return new WaitForSeconds(1.0f);
+        
     }
 }
