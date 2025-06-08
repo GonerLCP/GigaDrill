@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
 
     public Transform RespawnPoint;
 
+    //les 3 prochaines fonctions la, aucune idée de ce que ça fait, c'est pour l'input manager
     private void Awake()
     {
         action = new InputSystem_Actions();
@@ -75,7 +76,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)) //Pour commencer le drilling appuyer sur espace
         {
             drilling = true;
         }
@@ -99,16 +100,15 @@ public class Player : MonoBehaviour
         print("Y");
         if (true) //A définir quand le joueur est en train de driller
         {
-            if (_rm.increment != 0)
+            if (_rm.increment != 0) //Sers à detecter si l'on presse une autre touche que celle nécessaire
             {
-                //Faire le script d'explosion
                 Explosion();
             }
-            if (_rm.RythmWindow == true)
+            if (_rm.RythmWindow == true) //Si l'on est dans la bonne fenêtre d'opportunité, alors on l'indique au rythmanager
             {
                 _rm.RythmCompleted = true;
             }
-            else
+            else//Si on est pas dedans boumboum
             {
                 Explosion();
             }
@@ -178,15 +178,16 @@ public class Player : MonoBehaviour
 
     public void Explosion()
     {
-        dead = true;
-        exploding = true;
-        ExplosionAnimator.gameObject.SetActive(true);
-        _gm.QTE.SetActive(false);
-        StartCoroutine(Delai(2f));
+        dead = true; //empeche le déplacement
+        exploding = true;//Indique qu'on explose et que tout autour boumboum
+        ExplosionAnimator.gameObject.SetActive(true);//Activer et désactiver le gameobject est le seul moyen que j'ai trouvé de lancer l'anim
+        _gm.QTE.SetActive(false);//On arrete le QTE
+        StartCoroutine(Delai(2f));//Petite pause avant de respawn
     }
 
     IEnumerator Delai(float delaiLength)
     {
+        //On remet tout à l'état de base et on ReTP
         yield return new WaitForSeconds(delaiLength);
         exploding = false;
         drilling = false;

@@ -21,14 +21,13 @@ public class GameManager : MonoBehaviour
     {
         if (ActivePlayer.drilling == true && Activated == false)
         {
-            GridCollider.isTrigger = true;
-            print("Oui");
-            Activated = true;
-            QTE.SetActive(true);
+            GridCollider.isTrigger = true; //Permet de passer à travers la collision de la grid
+            Activated = true;//l'équivalent d'un doOnce
+            QTE.SetActive(true);//Commence le QTE
         }
         else if(ActivePlayer.drilling == false && Activated == true)
         {
-            GridCollider.isTrigger = false;
+            GridCollider.isTrigger = false;//Réactive la collision
             Activated = false;
             QTE.SetActive(false);
         }

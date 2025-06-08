@@ -12,8 +12,6 @@ public class RythmManager : MonoBehaviour
     public bool RythmWindow;
     public bool RythmCompleted;
 
-    public string[] ListOfButtons = {"Y", "B", "A", "X"};
-
     public List<Sprite> CircleMatchinButtons = new List<Sprite>();
     public GameObject CenterButton;
     public List<Sprite> CenterMatchinButtons = new List<Sprite>();
@@ -34,20 +32,14 @@ public class RythmManager : MonoBehaviour
         this.transform.parent.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void SetRythmWindow() 
+    public void SetRythmWindow() //Indique quand on est dans la fenetre d'opportunité. C'es tappellé depuis l'animator
     {
         print(RythmWindow);
         RythmWindow = !RythmWindow; //Attention, peut créer des problèmes si on exit l'anim pas au bon moment à préter attention
         //RythmWindow = RythmWindow ? false : true;
     }
 
-    public void ChangeButton()
+    public void ChangeButton()//Change le bouton à appuyer ainsi que les assets qui vont avec, donc le centre et le cercle du QTE
     {
         increment++;
         increment = increment > 3 ? 0 : increment;
@@ -56,15 +48,15 @@ public class RythmManager : MonoBehaviour
         CenterButton.GetComponent<SpriteRenderer>().sprite = CenterMatchinButtons[increment];
     }
 
-    public void RythmEnd()
+    public void RythmEnd()//Appelé à la fin de l'animator
     {
-        if (RythmCompleted == true)
+        if (RythmCompleted == true)//Si on à fait une touche, que c'était la bonne et que c'était dans les temps alors
         {
             ChangeButton();
             RythmCompleted = false;
             return;
         }
-        else
+        else //sinon boum boum
         {
             _gm.ActivePlayer.drilling=false;
             _gm.ActivePlayer.Explosion();
