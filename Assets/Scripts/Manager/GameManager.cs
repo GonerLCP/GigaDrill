@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Player ActivePlayer;
     public GameObject QTE;
-    public TilemapCollider2D GridCollider;
+    //public TilemapCollider2D GridCollider;
     bool Activated;
 
     private void Awake()
@@ -26,13 +26,13 @@ public class GameManager : MonoBehaviour
     {
         if (ActivePlayer.drilling == true && Activated == false)
         {
-            GridCollider.isTrigger = true; //Permet de passer à travers la collision de la grid
+            //GridCollider.isTrigger = true; //Permet de passer à travers la collision de la grid
             Activated = true;//l'équivalent d'un doOnce
             QTE.SetActive(true);//Commence le QTE
         }
         else if(ActivePlayer.drilling == false && Activated == true)
         {
-            GridCollider.isTrigger = false;//Réactive la collision
+            //GridCollider.isTrigger = false;//Réactive la collision
             Activated = false;
             QTE.SetActive(false);
         }

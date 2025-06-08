@@ -10,7 +10,6 @@ public class RockScript : MonoBehaviour
             GameManager.Instance.ActivePlayer.Explosion();
             Destroy(this.gameObject);
         }
-
         if (GameManager.Instance.ActivePlayer.exploding == true)
         {
             Destroy(this.gameObject);

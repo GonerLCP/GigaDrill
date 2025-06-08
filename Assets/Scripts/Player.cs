@@ -110,10 +110,26 @@ public class Player : MonoBehaviour
 
     private void YButtonPress(InputAction.CallbackContext context)
     {
-        print("Y");
-        if (true) //A définir quand le joueur est en train de driller
+        ButtonPressLogic(0);
+    }
+    private void BButtonPress(InputAction.CallbackContext context)
+    {
+        ButtonPressLogic(1);
+    }
+    private void AButtonPress(InputAction.CallbackContext context)
+    {
+        ButtonPressLogic(2);
+    }
+    private void XButtonPress(InputAction.CallbackContext context)
+    {
+        ButtonPressLogic(3);
+    }
+
+    public void ButtonPressLogic(int increment)
+    {
+        if (drilling) //A définir quand le joueur est en train de driller
         {
-            if (_rm.increment != 0) //Sers à detecter si l'on presse une autre touche que celle nécessaire
+            if (_rm.increment != increment) //Sers à detecter si l'on presse une autre touche que celle nécessaire
             {
                 Explosion();
             }
@@ -126,69 +142,11 @@ public class Player : MonoBehaviour
                 Explosion();
             }
         }
-    }
-    private void BButtonPress(InputAction.CallbackContext context)
-    {
-        print("B");
-        if (true) //A définir quand le joueur est en train de driller
+        else if (_rm.increment == increment)
         {
-            if (_rm.increment != 1)
-            {
-                //Faire le script d'explosion
-                Explosion();
-            }
-            if (_rm.RythmWindow == true)
-            {
-                _rm.RythmCompleted = true;
-            }
-            else
-            {
-                Explosion();
-            }
+            drilling = true;
         }
     }
-    private void AButtonPress(InputAction.CallbackContext context)
-    {
-        print("A");
-        if (true) //A définir quand le joueur est en train de driller
-        {
-            if (_rm.increment != 2)
-            {
-                //Faire le script d'explosion
-                Explosion();
-            }
-            if (_rm.RythmWindow == true)
-            {
-                _rm.RythmCompleted = true;
-            }
-            else
-            {
-                Explosion();
-            }
-        }
-    }
-    private void XButtonPress(InputAction.CallbackContext context)
-    {
-        print("X");
-        if (true) //A définir quand le joueur est en train de driller
-        {
-            if (_rm.increment != 3)
-            {
-                //Faire le script d'explosion
-                Explosion();
-            }
-            if (_rm.RythmWindow == true)
-            {
-                _rm.RythmCompleted = true;
-            }
-            else
-            {
-                Explosion();
-            }
-            
-        }
-    }
-
     public void Explosion()
     {
         dead = true; //empeche le déplacement

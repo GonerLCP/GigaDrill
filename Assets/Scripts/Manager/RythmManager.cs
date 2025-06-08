@@ -29,7 +29,8 @@ public class RythmManager : MonoBehaviour
         RythmWindow = false;
         increment = 0;
         RythmCompleted = false;
-        this.transform.parent.gameObject.SetActive(false);
+        //this.transform.parent.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
     }
 
     public void SetRythmWindow() //Indique quand on est dans la fenetre d'opportunité. C'es tappellé depuis l'animator
