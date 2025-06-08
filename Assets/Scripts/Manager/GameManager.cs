@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class GameManager : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Player ActivePlayer;
     public GameObject QTE;
+    public TilemapCollider2D GridCollider;
     bool Activated;
 
     void Start()
@@ -19,12 +21,14 @@ public class GameManager : MonoBehaviour
     {
         if (ActivePlayer.drilling == true && Activated == false)
         {
+            GridCollider.isTrigger = true;
             print("Oui");
             Activated = true;
             QTE.SetActive(true);
         }
         else if(ActivePlayer.drilling == false && Activated == true)
         {
+            GridCollider.isTrigger = false;
             Activated = false;
             QTE.SetActive(false);
         }

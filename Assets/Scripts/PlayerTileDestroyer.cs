@@ -4,10 +4,14 @@ using UnityEngine.Tilemaps;
 public class PlayerTileDestroyer : MonoBehaviour
 {
     public Tilemap targetTilemap;
-
+    GameManager gm;
+    private void Start()
+    {
+        gm = GameManager.Instance;
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Player>().drilling == true)
+        if (gm.ActivePlayer.drilling == true || gm.ActivePlayer.exploding == true)
         {
             Vector3 hitWorldPos = transform.position;
             Vector3Int cellPos = targetTilemap.WorldToCell(hitWorldPos);
@@ -15,6 +19,7 @@ public class PlayerTileDestroyer : MonoBehaviour
             if (targetTilemap.HasTile(cellPos))
             {
                 targetTilemap.SetTile(cellPos, null); // Supprime la tile
+                Destroy(this);
                 //Debug.Log("Tile supprimée à " + cellPos);
             }
         }
