@@ -16,11 +16,6 @@ public class GameManager : MonoBehaviour
         Activated = false;
     }
 
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

@@ -151,6 +151,7 @@ public class Player : MonoBehaviour
     {
         dead = true; //empeche le déplacement
         exploding = true;//Indique qu'on explose et que tout autour boumboum
+        Impulsion = 0; //evite le drift au respawn
         ExplosionAnimator.gameObject.SetActive(true);//Activer et désactiver le gameobject est le seul moyen que j'ai trouvé de lancer l'anim
         _gm.QTE.SetActive(false);//On arrete le QTE
         StartCoroutine(Delai(2f));//Petite pause avant de respawn
