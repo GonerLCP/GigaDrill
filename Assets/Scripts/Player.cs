@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     private GameManager _gm;
     private RythmManager _rm;
     public bool QTESuccess;
-    private bool dead;
+    public bool dead;
 
     public Transform RespawnPoint;
     public float Impulsion;
@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 
     public void ButtonPressLogic(int increment)
     {
-        if (drilling) //A définir quand le joueur est en train de driller
+        if (drilling && dead == false) //A définir quand le joueur est en train de driller
         {
             if (_rm.increment != increment) //Sers à detecter si l'on presse une autre touche que celle nécessaire
             {
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
                 Explosion();
             }
         }
-        else if (_rm.increment == increment)
+        else if (_rm.increment == increment && dead == false)
         {
             _rm.ChangeButton();
             drilling = true;
@@ -153,6 +153,8 @@ public class Player : MonoBehaviour
         dead = true; //empeche le déplacement
         exploding = true;//Indique qu'on explose et que tout autour boumboum
         Impulsion = 0; //evite le drift au respawn
+        _rm.AnimatorSpeed = _rm.AnimatorBaseSpeed;
+        _rm.GetComponent<Animator>().speed = _rm.AnimatorBaseSpeed;
         ExplosionAnimator.gameObject.SetActive(true);//Activer et désactiver le gameobject est le seul moyen que j'ai trouvé de lancer l'anim
         _gm.QTE.SetActive(false);//On arrete le QTE
         StartCoroutine(Delai(2f));//Petite pause avant de respawn
@@ -167,5 +169,6 @@ public class Player : MonoBehaviour
         dead = false;
         ExplosionAnimator.gameObject.SetActive(false);
         transform.position = RespawnPoint.position;
+        print("respawn");
     }
 }

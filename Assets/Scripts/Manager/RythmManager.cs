@@ -26,7 +26,8 @@ public class RythmManager : MonoBehaviour
     public AudioClip drill;
     public AudioClip gleam;
 
-    private float AnimatorSpeed;
+    public float AnimatorBaseSpeed;
+    public float AnimatorSpeed;
     public float AnimatorMaxSpeed;
     public float AnimatorSpeedIncreaseSetter;
 
@@ -41,7 +42,8 @@ public class RythmManager : MonoBehaviour
         RythmCompleted = false;
         //this.transform.parent.gameObject.SetActive(false);
         this.gameObject.SetActive(false);
-        AnimatorSpeed = 1;
+        AnimatorSpeed = AnimatorBaseSpeed;
+        this.GetComponent<Animator>().speed = AnimatorBaseSpeed;
     }
 
     public void SetRythmWindow() //Indique quand on est dans la fenetre d'opportunité. C'es tappellé depuis l'animator
@@ -67,7 +69,8 @@ public class RythmManager : MonoBehaviour
         if (RythmCompleted == true)//Si on à fait une touche, que c'était la bonne et que c'était dans les temps alors
         {
             AnimatorSpeed += AnimatorSpeedIncreaseSetter;
-            AnimatorSpeed = AnimatorSpeed >= AnimatorMaxSpeed ? AnimatorMaxSpeed : AnimatorSpeed; 
+            bool check = AnimatorSpeed >= AnimatorMaxSpeed;
+            AnimatorSpeed = (check ? AnimatorMaxSpeed : AnimatorSpeed); 
             this.GetComponent<Animator>().speed = AnimatorSpeed;
             ChangeButton();
             RythmCompleted = false;
@@ -75,7 +78,6 @@ public class RythmManager : MonoBehaviour
         }
         else //sinon boum boum
         {
-            AnimatorSpeed= 1;
             _gm.ActivePlayer.drilling=false;
             _gm.ActivePlayer.Explosion();
         }
