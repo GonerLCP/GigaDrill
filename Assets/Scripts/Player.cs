@@ -144,6 +144,7 @@ public class Player : MonoBehaviour
         }
         else if (_rm.increment == increment)
         {
+            _rm.ChangeButton();
             drilling = true;
         }
     }
@@ -166,11 +167,5 @@ public class Player : MonoBehaviour
         dead = false;
         ExplosionAnimator.gameObject.SetActive(false);
         transform.position = RespawnPoint.position;
-    }
-
-    IEnumerator DecreaseSpeed()
-    {
-            yield return new WaitForSeconds(1.0f);
-        
     }
 }
