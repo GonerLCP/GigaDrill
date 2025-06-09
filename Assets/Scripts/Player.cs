@@ -32,6 +32,8 @@ public class Player : MonoBehaviour
     public float ImpulsionReduction;
     public bool Ending;
 
+    public AudioSource audioSource;
+    public AudioClip ExplosionSound;
     //les 3 prochaines fonctions la, aucune idée de ce que ça fait, c'est pour l'input manager
     private void Awake()
     {
@@ -157,6 +159,8 @@ public class Player : MonoBehaviour
         _rm.GetComponent<Animator>().speed = _rm.AnimatorBaseSpeed;
         ExplosionAnimator.gameObject.SetActive(true);//Activer et désactiver le gameobject est le seul moyen que j'ai trouvé de lancer l'anim
         _gm.QTE.SetActive(false);//On arrete le QTE
+        audioSource.PlayOneShot(ExplosionSound, 0.3f);
+        audioSource.pitch = 0.8f;
         StartCoroutine(Delai(2f));//Petite pause avant de respawn
     }
 

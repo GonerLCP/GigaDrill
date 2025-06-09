@@ -1,6 +1,5 @@
 using System.Collections;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
@@ -15,6 +14,7 @@ public class EndGame : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip EndSong;
 
+    public AudioSource MusicBG;
     void Start()
     {
         // Commencer complètement transparents
@@ -28,6 +28,7 @@ public class EndGame : MonoBehaviour
         GameManager.Instance.ActivePlayer.Impulsion = 3f;
         GameManager.Instance.ActivePlayer.ImpulsionReduction = 0.005f;
         StartCoroutine(FadeIn());
+        MusicBG.Stop();
         audioSource.PlayOneShot(EndSong, 0.1f);
     }
 

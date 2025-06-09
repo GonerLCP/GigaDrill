@@ -50,7 +50,6 @@ public class RythmManager : MonoBehaviour
     {
         RythmWindow = true; //Attention, peut créer des problèmes si on exit l'anim pas au bon moment à préter attention
         audioSource.PlayOneShot(gleam, 0.1f);
-        //RythmWindow = RythmWindow ? false : true;
     }
 
     public void ChangeButton()//Change le bouton à appuyer ainsi que les assets qui vont avec, donc le centre et le cercle du QTE
