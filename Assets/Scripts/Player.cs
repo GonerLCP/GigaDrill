@@ -29,6 +29,8 @@ public class Player : MonoBehaviour
     public float Impulsion;
     public float ImpulsionSetter;
     public float ImpulsionBlocReduce;
+    public float ImpulsionReduction;
+    public bool Ending;
 
     //les 3 prochaines fonctions la, aucune idée de ce que ça fait, c'est pour l'input manager
     private void Awake()
@@ -74,24 +76,22 @@ public class Player : MonoBehaviour
         _gm = GameManager.Instance;
         exploding = false;
         dead = false;
+        Ending = false;
+        ImpulsionReduction = 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) //Pour commencer le drilling appuyer sur espace
-        {
-            drilling = true;
-        }
         if (dead) { return; } //empêche le déplacement si on est mort
 
         if (Impulsion >= 0.1f)
         {
-            Impulsion -= 0.1f;
+            Impulsion -= ImpulsionReduction;
         }
         else { Impulsion = 0f; }
         
-        if (move.ReadValue<Vector2>().magnitude> 0.1f)
+        if (move.ReadValue<Vector2>().magnitude> 0.1f && Ending == false)
         {
             direction = move.ReadValue<Vector2>() * movementSpeed;
         }
